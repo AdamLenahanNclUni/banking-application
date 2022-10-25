@@ -13,6 +13,18 @@ class Customer:
         self.b = balance
         self.ov = overdraftLimit
 
+        i = 0
+        with open('./UserDetails.csv', 'r') as file:
+            filecontent = csv.reader(file)
+            for row in filecontent:
+                i += 1
+        id = "b"+str(i)
+
+        header = [id, self.f, self.l, self.t, self.p, self.d, self.o, self.b, self.ov]
+        opener = open("./UserDetails.csv", "w")
+        writer = csv.writer(opener)
+        writer.writerow(header)
+
 
 
     def withdrawal(self, amount):
@@ -53,4 +65,5 @@ def withdrawForUser():
 
 def depositForUser():
     print("deposit for user")
+
 
