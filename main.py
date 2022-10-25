@@ -1,3 +1,4 @@
+import csv
 class Customer:
     """A class created to make a blueprint for customers of the bank"""
 
@@ -11,6 +12,8 @@ class Customer:
         self.o = occupation
         self.b = balance
         self.ov = overdraftLimit
+
+
 
     def withdrawal(self, amount):
         """lets the user withdraw an amount of money, catches any errors caused by going over overdraft limit"""
@@ -37,3 +40,17 @@ class Customer:
         """lets the user deposit an amount of money, adds it to their account"""
         self.b += amount
         print("you have deposited £", amount, "new bank balance is £", self.b)
+
+
+def addUser():
+    print("adding User")
+
+def searchForUser():
+    print("searching for user")
+
+def withdrawForUser():
+    print("withdraw for user")
+
+def depositForUser():
+    print("deposit for user")
+
