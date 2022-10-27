@@ -53,3 +53,5 @@ class Customer:
         """lets the user deposit an amount of money, adds it to their account"""
         self.b += amount
         print("you have deposited £", amount, "new bank balance is £", self.b)
+
+
