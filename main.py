@@ -21,11 +21,15 @@ class Customer:
                 i += 1
         id = "b"+str(i)
 
-        header = [id, self.f, self.l, self.t, self.p, self.d, self.o, self.b, self.ov]
-        opener = open("./UserDetails.csv", "w")
-        writer = csv.writer(opener)
-        writer.writerow(header)
-        opener.close
+        rowOfItems = [id, self.f, self.l, self.t, self.p, self.d, self.o, self.b, self.ov]
+        #opener = open("./UserDetails.csv", "a")
+        #writer = csv.writer(opener)
+        #writer.writerow(header)
+        #opener.close
+        with open('./UserDetails.csv', 'a',  newline='') as appender:
+            writer_object = csv.writer(appender)
+            writer_object.writerow(rowOfItems)
+            appender.close()
 
     def withdrawal(self, amount):
         """lets the user withdraw an amount of money, catches any errors caused by going over overdraft limit"""
@@ -56,6 +60,7 @@ class Customer:
 
 
 
+
 def addUser():
     print("adding User")
 
@@ -63,10 +68,13 @@ def addUser():
 def searchForUser():
     print("searching for user")
 
+
 def withdrawForUser():
     print("withdraw for user")
 
 def depositForUser():
     print("deposit for user")
+
+
 
 
