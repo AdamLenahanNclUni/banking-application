@@ -2,33 +2,30 @@ import csv
 class Customer:
     """A class created to make a blueprint for customers of the bank"""
 
-    def __init__(self, firstName, lastName, title, preferredPronouns, dateBorn, occupation, balance, overdraftLimit):
+    def __init__(self, first_name, last_name, title, preferred_pronouns, date_born, occupation, balance, overdraft_limit):
         """creates a user entity and adds them to the csv file for later use"""
         # initialising attributes for the class
-        self.f = firstName
-        self.l = lastName
+        self.f = first_name
+        self.l = last_name
         self.t = title
-        self.p = preferredPronouns
-        self.d = dateBorn
+        self.p = preferred_pronouns
+        self.d = date_born
         self.o = occupation
         self.b = balance
-        self.ov = overdraftLimit
+        self.ov = overdraft_limit
 
         i = 0
         with open('./UserDetails.csv', 'r') as file:
-            filecontent = csv.reader(file)
-            for row in filecontent:
+            file_content = csv.reader(file)
+            for row in file_content:
                 i += 1
         id = "b"+str(i)
 
-        rowOfItems = [id, self.f, self.l, self.t, self.p, self.d, self.o, self.b, self.ov]
-        #opener = open("./UserDetails.csv", "a")
-        #writer = csv.writer(opener)
-        #writer.writerow(header)
-        #opener.close
+        row_of_items = [id, self.f, self.l, self.t, self.p, self.d, self.o, self.b, self.ov]
+
         with open('./UserDetails.csv', 'a',  newline='') as appender:
             writer_object = csv.writer(appender)
-            writer_object.writerow(rowOfItems)
+            writer_object.writerow(row_of_items)
             appender.close()
 
     def withdrawal(self, amount):
@@ -56,25 +53,3 @@ class Customer:
         """lets the user deposit an amount of money, adds it to their account"""
         self.b += amount
         print("you have deposited £", amount, "new bank balance is £", self.b)
-
-
-
-
-
-def addUser():
-    print("adding User")
-
-
-def searchForUser():
-    print("searching for user")
-
-
-def withdrawForUser():
-    print("withdraw for user")
-
-def depositForUser():
-    print("deposit for user")
-
-
-
-
