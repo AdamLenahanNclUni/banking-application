@@ -3,6 +3,7 @@ class Customer:
     """A class created to make a blueprint for customers of the bank"""
 
     def __init__(self, firstName, lastName, title, preferredPronouns, dateBorn, occupation, balance, overdraftLimit):
+        """creates a user entity and adds them to the csv file for later use"""
         # initialising attributes for the class
         self.f = firstName
         self.l = lastName
@@ -24,8 +25,7 @@ class Customer:
         opener = open("./UserDetails.csv", "w")
         writer = csv.writer(opener)
         writer.writerow(header)
-
-
+        opener.close
 
     def withdrawal(self, amount):
         """lets the user withdraw an amount of money, catches any errors caused by going over overdraft limit"""
@@ -54,8 +54,11 @@ class Customer:
         print("you have deposited £", amount, "new bank balance is £", self.b)
 
 
+
+
 def addUser():
     print("adding User")
+
 
 def searchForUser():
     print("searching for user")
