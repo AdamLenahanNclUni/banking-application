@@ -28,10 +28,22 @@ def main_menu():
 
 def create_new_account():
     """gives the user a way to create a new line in the csv file which represents a user"""
-    first_name = input("What is the first name of your user?")
+    first_name = input("What is the first name of your user? ")
+    if not isinstance(first_name, str):
+        raise TypeError("Name should be string")
+
     last_name = input("What is the last name of your user? ")
+    if not isinstance(last_name, str):
+        raise TypeError("Name should be string")
+
     user_title = input("What is your user's title? ")
+    if not isinstance(user_title, str):
+        raise TypeError("Name should be string")
+
     preferred_pronouns = input("What are your user's preferred pronouns? ")
+    if not isinstance(first_name, str):
+        raise TypeError("Name should be string")
+
     print("What date was your user born? ")
     date_entry = input('Enter a date (i.e. dd/mm/yyyy) ')
     try:
@@ -39,9 +51,28 @@ def create_new_account():
         date = datetime(day, month, year)
     except ValueError:
         print("Incorrect format")
+    if not isinstance(date, datetime):
+        raise TypeError("date of birth should be a date")
+
     user_occupation = input("What is your user's occupation? ")
-    user_balance = input("What is your user's balance? ")
+    if not isinstance(user_occupation, str):
+        raise TypeError("occupation should be string")
+
+    i = True
+    while i:
+        user_balance = input("What is your user's balance? ")
+        try:
+            user_balance = float(user_balance)
+            i=False
+        except:
+            print("Incorrect balance enterred. Please enter your user's balance again")
+            i=True
+            user_balance=1
+
     draught_limit = input("What is your user's over-draught limit.? ")
+    draught_limit = float(draught_limit)
+    if not isinstance(draught_limit, float):
+        raise TypeError("the user's over-draught limit should be a number")
     Customer(first_name, last_name, user_title, preferred_pronouns, date, user_occupation, user_balance, draught_limit)
 
 
