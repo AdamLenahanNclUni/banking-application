@@ -28,6 +28,7 @@ def main_menu():
 
 def create_new_account():
     """gives the user a way to create a new line in the csv file which represents a user"""
+
     first_name = input("What is the first name of your user? ")
     if not isinstance(first_name, str):
         raise TypeError("Name should be string")
@@ -38,21 +39,24 @@ def create_new_account():
 
     user_title = input("What is your user's title? ")
     if not isinstance(user_title, str):
-        raise TypeError("Name should be string")
+        raise TypeError("title should be string")
 
     preferred_pronouns = input("What are your user's preferred pronouns? ")
     if not isinstance(first_name, str):
         raise TypeError("Name should be string")
 
     print("What date was your user born? ")
-    date_entry = input('Enter a date (i.e. dd/mm/yyyy) ')
-    try:
-        day, month, year = map(int, date_entry.split('/'))
-        date = datetime(day, month, year)
-    except ValueError:
-        print("Incorrect format")
-    if not isinstance(date, datetime):
-        raise TypeError("date of birth should be a date")
+    i = True
+    while i:
+        try:
+            date_entry = input('Enter a date (i.e. dd/mm/yyyy) ')
+            print(date_entry)
+            day, month, year = map(int, date_entry.split('/'))
+            date = datetime(day, month, year)
+
+            i = False
+        except ValueError:
+            print("Incorrect format, please try again")
 
     user_occupation = input("What is your user's occupation? ")
     if not isinstance(user_occupation, str):
@@ -69,10 +73,17 @@ def create_new_account():
             i=True
             user_balance=1
 
-    draught_limit = input("What is your user's over-draught limit.? ")
-    draught_limit = float(draught_limit)
-    if not isinstance(draught_limit, float):
-        raise TypeError("the user's over-draught limit should be a number")
+    i = True
+    while i:
+        draught_limit = input("What is your user's over-draught limit.? ")
+        try:
+            draught_limit = float(draught_limit)
+            i=False
+        except:
+            print("Incorrect overdraught limit enterred. Please enter your user's overdraught limit again")
+            i = True
+            draught_limit  = 1
+
     Customer(first_name, last_name, user_title, preferred_pronouns, date, user_occupation, user_balance, draught_limit)
 
 
