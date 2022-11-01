@@ -18,12 +18,11 @@ def main_menu():
         elif choice == "5":
             print("hi")
         elif choice == "6":
-            print("hi")
+            search_for_clients_main()
         elif choice == "7":
             stop = True
         else:
             print("unexpected input, please try again")
-
 
 def create_new_account():
     """gives the user a way to create a new line in the csv file which represents a user"""
@@ -43,7 +42,7 @@ def create_new_account():
     preferred_pronouns = input("What are your user's preferred pronouns? ")
     if not isinstance(first_name, str):
         raise TypeError("Name should be string")
-
+   # Need to add validation for checking the user is over 18
     print("What date was your user born? ")
     i = True
     while i:
@@ -89,7 +88,24 @@ def create_new_account():
             i = True
             draught_limit  = 1
 
-    Customer(first_name, last_name, user_title, preferred_pronouns, date, user_occupation, user_balance, draught_limit)
+    Customer(first_name, last_name, user_title, preferred_pronouns, date_of_birth, user_occupation, user_balance, draught_limit)
 
+def search_for_clients_main():
+    stop = False
+    while stop is False:
+        choice = input("would you like to search for a specific client (1) or search for any client that matches a set of criteria (2)")
+        if choice == "1":
+            search_for_clients_specific()
+            stop = True
+        elif choice == "2":
+            search_for_clients_by_criteria()
+            stop = True
+        else:
+            print("input unknown please try again")
+            stop = False
+def search_for_clients_specific():
+    input("Please enter the name of the client you would like to view")
 
+def search_for_clients_by_criteria():
+    print("hi")
 main_menu()
