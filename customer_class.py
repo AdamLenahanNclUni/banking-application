@@ -54,4 +54,6 @@ class Customer:
         self.b += amount
         print("you have deposited £", amount, "new bank balance is £", self.b)
 
+    def __str__(self):
+        return f'Customer {self.f} {self.l} has a balance of {self.b}'
 
