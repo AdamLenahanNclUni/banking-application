@@ -1,6 +1,5 @@
 from customer_class import Customer
-from datetime import datetime
-
+import datetime
 def main_menu():
     """creates an infinite loop that presents the user with a list of options for interacting with an account?"""
     stop = False
@@ -49,12 +48,18 @@ def create_new_account():
     i = True
     while i:
         try:
+            current_date = datetime.date.today()
             date_entry = input('Enter a date (i.e. dd/mm/yyyy) ')
-            print(date_entry)
             day, month, year = map(int, date_entry.split('/'))
-            date = datetime(day, month, year)
-
-            i = False
+            if year < 1903:
+                print("please enter a valid year your user is born.")
+                print("years must be four digits long")
+            elif year > current_date.year:
+                print("Please enter a valid year for your user's date of birth")
+            else:
+                date_of_birth = datetime.date(year, month, day)
+                print(date_of_birth)
+                i = False
         except ValueError:
             print("Incorrect format, please try again")
 
