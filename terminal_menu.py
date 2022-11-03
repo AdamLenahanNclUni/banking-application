@@ -1,11 +1,14 @@
 from customer_class import Customer
 import datetime
+import csv
+
+
 def main_menu():
     """creates an infinite loop that presents the user with a list of options for interacting with an account?"""
     stop = False
     while stop is False:
         print("would you like to add a new customer (1), delete a customer (2), edit a customers details(3),"
-              " make a deposit(4), make a withdrawal(5) or search for a client(6), or logout (7)")
+              " view a list of all customers(4) or search for a client(5), or logout (6)")
         choice = str(input())
         if choice == "1":
             create_new_account()
@@ -14,15 +17,14 @@ def main_menu():
         elif choice == "3":
             print("hi")
         elif choice == "4":
-            print("hi")
+            view_all_customers()
         elif choice == "5":
-            print("hi")
-        elif choice == "6":
             search_for_clients_main()
-        elif choice == "7":
+        elif choice == "6":
             stop = True
         else:
             print("unexpected input, please try again")
+
 
 def create_new_account():
     """gives the user a way to create a new line in the csv file which represents a user"""
@@ -42,7 +44,7 @@ def create_new_account():
     preferred_pronouns = input("What are your user's preferred pronouns? ")
     if not isinstance(first_name, str):
         raise TypeError("Name should be string")
-   # Need to add validation for checking the user is over 18
+    # Need to add validation for checking the user is over 18
     print("What date was your user born? ")
     i = True
     while i:
@@ -71,29 +73,40 @@ def create_new_account():
         user_balance = input("What is your user's balance? ")
         try:
             user_balance = float(user_balance)
-            i=False
+            i = False
         except:
-            print("Incorrect balance enterred. Please enter your user's balance again")
-            i=True
-            user_balance=1
+            print("Incorrect balance entered. Please enter your user's balance again")
+            i = True
+            user_balance = 1
 
     i = True
     while i:
         draught_limit = input("What is your user's over-draught limit.? ")
         try:
             draught_limit = float(draught_limit)
-            i=False
+            i = False
         except:
             print("Incorrect overdraught limit enterred. Please enter your user's overdraught limit again")
             i = True
-            draught_limit  = 1
+            draught_limit = 1
 
-    Customer(first_name, last_name, user_title, preferred_pronouns, date_of_birth, user_occupation, user_balance, draught_limit)
+    new_client = Customer(first_name, last_name, user_title, preferred_pronouns, date_of_birth, user_occupation, user_balance,
+             draught_limit)
+    new_client.add_client_to_csv()
+
+
+def delete_customer():
+    id_to_delete = input("please enter the ID of the account you would like to delete")
+
+
+
 
 def search_for_clients_main():
     stop = False
     while stop is False:
-        choice = input("would you like to search for a specific client (1) or search for any client that matches a set of criteria (2)")
+        choice = input(
+            "would you like to search for a specific client (1) or search for any client that matches a set of "
+            "criteria (2)")
         if choice == "1":
             search_for_clients_specific()
             stop = True
@@ -103,9 +116,42 @@ def search_for_clients_main():
         else:
             print("input unknown please try again")
             stop = False
+
+
 def search_for_clients_specific():
-    input("Please enter the name of the client you would like to view")
+    first_or_last_name = input("Please enter the first or last name of the client you would like to view")
+    # code adapted from https://www.tutorialspoint.com/how-to-read-csv-file-in-python#:~:text=Explanation%20line%20by
+    # %20line%201%20import%20csv%20%E2%88%92,filecontents%20to%20print%20the%20file%20content%20row%20wise.
+    with open('UserDetails.csv', 'r') as file:
+        filecontent = csv.reader(file)
+        for row in filecontent:
+            if row[1] == first_or_last_name:
+                print(row)
+            elif row[2] == first_or_last_name:
+                print(row)
+            else:
+                print("we do not currently have a client with that name")
+    user_entered_id = input("Please enter the ID of the client displayed on the terminal you would like to view")
+    with open('UserDetails.csv', 'r') as file:
+        filecontent = csv.reader(file)
+        for row in filecontent:
+            if row[0] == user_entered_id:
+                print("row")
+            else:
+                print("we do not currently have an applicant with that id")
+
 
 def search_for_clients_by_criteria():
     print("hi")
+
+
+def view_all_customers():
+    # code adapted from https://www.tutorialspoint.com/how-to-read-csv-file-in-python#:~:text=Explanation%20line%20by
+    # %20line%201%20import%20csv%20%E2%88%92,filecontents%20to%20print%20the%20file%20content%20row%20wise.
+    with open('UserDetails.csv', 'r') as file:
+        filecontent = csv.reader(file)
+        for row in filecontent:
+            print(row)
+
+
 main_menu()

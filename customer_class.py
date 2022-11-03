@@ -14,16 +14,17 @@ class Customer:
         self.b = balance
         self.ov = overdraft_limit
 
+    def add_client_to_csv(self):
         i = 0
         with open('./UserDetails.csv', 'r') as file:
             file_content = csv.reader(file)
             for row in file_content:
                 i += 1
-        id = "b"+str(i)
+        id = "b" + str(i)
 
         row_of_items = [id, self.f, self.l, self.t, self.p, self.d, self.o, self.b, self.ov]
 
-        with open('./UserDetails.csv', 'a',  newline='') as appender:
+        with open('./UserDetails.csv', 'a', newline='') as appender:
             writer_object = csv.writer(appender)
             writer_object.writerow(row_of_items)
             appender.close()
