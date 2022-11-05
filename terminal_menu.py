@@ -97,6 +97,14 @@ def create_new_account():
 
 def delete_customer():
     id_to_delete = input("please enter the ID of the account you would like to delete")
+    input = open('UserDetails.csv', 'rb')
+    output = open('UserDetailsDelete.csv', 'wb')
+    writer = csv.writer(output)
+    for row in csv.reader(input):
+        if row[0] != id_to_delete:
+            writer.writerow(row)
+    input.close()
+    output.close()
 
 
 
@@ -142,7 +150,15 @@ def search_for_clients_specific():
 
 
 def search_for_clients_by_criteria():
-    print("hi")
+    choice=input("would you like to view clients by balance(1), occupation(2), title(3), or age(4)")
+    if choice=="1":
+        print("yo")
+    elif choice=="2":
+        print("yo")
+    elif choice=="3":
+        print("yo")
+    elif choice=="4":
+        print("yo")
 
 
 def view_all_customers():
@@ -153,5 +169,7 @@ def view_all_customers():
         for row in filecontent:
             print(row)
 
-
+f = open("UserDetails.csv", "w")
+f.truncate()
+f.close()
 main_menu()
