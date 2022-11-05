@@ -13,7 +13,7 @@ def main_menu():
         if choice == "1":
             create_new_account()
         elif choice == "2":
-            print("hi")
+            delete_customer()
         elif choice == "3":
             print("hi")
         elif choice == "4":
@@ -97,17 +97,31 @@ def create_new_account():
 
 def delete_customer():
     id_to_delete = input("please enter the ID of the account you would like to delete")
-    input = open('UserDetails.csv', 'rb')
-    output = open('UserDetailsDelete.csv', 'wb')
-    writer = csv.writer(output)
-    for row in csv.reader(input):
+    input_file = open('UserDetails.csv', 'r')
+    output_file = open('UserDetailsDelete.csv', 'a', newline='')
+    writer = csv.writer(output_file)
+    reader = csv.reader(input_file)
+    for row in reader:
         if row[0] != id_to_delete:
             writer.writerow(row)
-    input.close()
-    output.close()
+    input_file.close()
+    output_file.close()
 
+    f = open("UserDetails.csv", "w+")
+    f.close()
 
+    input_file_two = open("UserDetailsDelete.csv" , "r")
+    reader = csv.reader(input_file_two)
+    for row in reader:
+        with open('./UserDetails.csv', 'a', newline='') as appender:
+            writer_object = csv.writer(appender)
+            writer_object.writerow(row)
+            appender.close()
+    input_file_two.close()
 
+    f = open("UserDetailsDelete.csv", "w+")
+    f.truncate()
+    f.close()
 
 def search_for_clients_main():
     stop = False
@@ -169,7 +183,5 @@ def view_all_customers():
         for row in filecontent:
             print(row)
 
-f = open("UserDetails.csv", "w")
-f.truncate()
-f.close()
+
 main_menu()
