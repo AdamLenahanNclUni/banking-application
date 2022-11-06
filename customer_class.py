@@ -2,9 +2,10 @@ import csv
 class Customer:
     """A class created to make a blueprint for customers of the bank"""
 
-    def __init__(self, first_name, last_name, title, preferred_pronouns, date_born, occupation, balance, overdraft_limit):
+    def __init__(self,ID, first_name, last_name, title, preferred_pronouns, date_born, occupation, balance, overdraft_limit):
         """creates a user entity and adds them to the csv file for later use"""
         # initialising attributes for the class
+        self.i = ID
         self.f = first_name
         self.l = last_name
         self.t = title
@@ -15,14 +16,9 @@ class Customer:
         self.ov = overdraft_limit
 
     def add_client_to_csv(self):
-        i = 0
-        with open('./UserDetails.csv', 'r') as file:
-            file_content = csv.reader(file)
-            for row in file_content:
-                i += 1
-        id = "b" + str(i)
 
-        row_of_items = [id, self.f, self.l, self.t, self.p, self.d, self.o, self.b, self.ov]
+
+        row_of_items = [self.i, self.f, self.l, self.t, self.p, self.d, self.o, self.b, self.ov]
 
         with open('./UserDetails.csv', 'a', newline='') as appender:
             writer_object = csv.writer(appender)
