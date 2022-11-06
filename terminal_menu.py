@@ -94,7 +94,10 @@ def create_new_account():
     with open('./UserDetails.csv', 'r') as file:
         file_content = csv.reader(file)
         for row in file_content:
-            i += 1
+            i = row[0]
+    i=i[1:]
+    i = int(i)
+    i+=1
     id = "b" + str(i)
 
     new_client = Customer(id, first_name, last_name, user_title, preferred_pronouns, date_of_birth, user_occupation, user_balance,
