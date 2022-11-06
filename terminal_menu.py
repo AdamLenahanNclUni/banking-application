@@ -15,7 +15,7 @@ def main_menu():
         elif choice == "2":
             delete_customer()
         elif choice == "3":
-            print("hi")
+            edit_customer()
         elif choice == "4":
             view_all_customers()
         elif choice == "5":
@@ -104,9 +104,12 @@ def create_new_account():
              draught_limit)
     new_client.add_client_to_csv()
 
+def select_customer_by_id():
+    id_to_select = input("please enter the ID of the account you would like to delete")
+    return id_to_select
 
-def delete_customer():
-    id_to_delete = input("please enter the ID of the account you would like to delete")
+
+def remove_customer(id_to_delete):
     input_file = open('UserDetails.csv', 'r')
     output_file = open('UserDetailsDelete.csv', 'a', newline='')
     writer = csv.writer(output_file)
@@ -120,7 +123,7 @@ def delete_customer():
     f = open("UserDetails.csv", "w+")
     f.close()
 
-    input_file_two = open("UserDetailsDelete.csv" , "r")
+    input_file_two = open("UserDetailsDelete.csv", "r")
     reader = csv.reader(input_file_two)
     for row in reader:
         with open('./UserDetails.csv', 'a', newline='') as appender:
@@ -132,6 +135,36 @@ def delete_customer():
     f = open("UserDetailsDelete.csv", "w+")
     f.truncate()
     f.close()
+
+
+def delete_customer():
+    id_to_delete = select_customer_by_id()
+    remove_customer(id_to_delete)
+
+
+def edit_customer():
+    choice =  select_customer_by_id()
+    with open('UserDetails.csv', 'r') as file:
+        filecontent = csv.reader(file)
+        for row in filecontent:
+            if row[0] == choice:
+                row_of_values=row
+                print(row)
+                column_to_change = input(
+                    "would you like to change this user's first name(1), last name(2), title(3), preferred pronouns(4), date of birth(5), occupation(6) or overdraught limit(7)")
+                column_to_change = int(column_to_change)
+                remove_customer(choice)
+                new_value = input("what is the new value you would like to change this column to? ")
+                print(row_of_values)
+                row_of_values[column_to_change]= new_value
+                print(row_of_values)
+                new_customer=Customer(choice,row_of_values[1],row_of_values[2],row_of_values[3],row_of_values[4],row_of_values[5],row_of_values[6],row_of_values[7],row_of_values[8])
+                new_customer.add_client_to_csv()
+            else:
+                print("we do not currently have an applicant with that id")
+
+
+
 
 def search_for_clients_main():
     stop = False
@@ -168,7 +201,7 @@ def search_for_clients_specific():
         filecontent = csv.reader(file)
         for row in filecontent:
             if row[0] == user_entered_id:
-                print("row")
+                print(row)
             else:
                 print("we do not currently have an applicant with that id")
 
