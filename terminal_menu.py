@@ -26,6 +26,26 @@ def main_menu():
             print("unexpected input, please try again")
 
 
+def get_date():
+    i = True
+    while i:
+        try:
+            current_date = datetime.date.today()
+            date_entry = input('Enter a date (i.e. dd/mm/yyyy) ')
+            day, month, year = map(int, date_entry.split('/'))
+            if year < 1903:
+                print("please enter a valid year your user is born.")
+                print("years must be four digits long")
+            elif year > current_date.year:
+                print("Please enter a valid year for your user's date of birth")
+            else:
+                date_of_birth = datetime.date(year, month, day)
+                print(date_of_birth)
+                i = False
+        except ValueError:
+            print("Incorrect format, please try again")
+    return date_of_birth
+
 def create_new_account():
     """gives the user a way to create a new line in the csv file which represents a user"""
 
@@ -46,23 +66,7 @@ def create_new_account():
         raise TypeError("Name should be string")
     # Need to add validation for checking the user is over 18
     print("What date was your user born? ")
-    i = True
-    while i:
-        try:
-            current_date = datetime.date.today()
-            date_entry = input('Enter a date (i.e. dd/mm/yyyy) ')
-            day, month, year = map(int, date_entry.split('/'))
-            if year < 1903:
-                print("please enter a valid year your user is born.")
-                print("years must be four digits long")
-            elif year > current_date.year:
-                print("Please enter a valid year for your user's date of birth")
-            else:
-                date_of_birth = datetime.date(year, month, day)
-                print(date_of_birth)
-                i = False
-        except ValueError:
-            print("Incorrect format, please try again")
+    date_of_birth = get_date()
 
     user_occupation = input("What is your user's occupation? ")
     if not isinstance(user_occupation, str):
@@ -150,19 +154,37 @@ def edit_customer():
             if row[0] == choice:
                 row_of_values=row
                 print(row)
-                column_to_change = input(
-                    "would you like to change this user's first name(1), last name(2), title(3), preferred pronouns(4), date of birth(5), occupation(6) or overdraught limit(7)")
-                column_to_change = int(column_to_change)
+                stop = False
+                while stop is False:
+                    try:
+                        column_to_change = input(
+                            "would you like to change this user's first name(1), last name(2), title(3), preferred pronouns(4), date of birth(5), occupation(6) or overdraught limit(7)")
+                        column_to_change = int(column_to_change)
+                        if column_to_change>0 and column_to_change<8:
+                            stop = True
+                        else:
+                            print("please enter a number between 1 and 7")
+                            stop = False
+                    except:
+                         print("please enter an integer value")
                 remove_customer(choice)
-                new_value = input("what is the new value you would like to change this column to? ")
+
+                print("what is the new value you would like to change this column to? ")
                 print(row_of_values)
+                if column_to_change == "7":
+                    column_to_change+=1
+                    print("please enter the new balance for the user")
+                    new_value = input()
+                elif column_to_change== "5":
+                    new_value = get_date
+                else:
+                    new_value = input("please enter the new value for this user")
                 row_of_values[column_to_change]= new_value
                 print(row_of_values)
                 new_customer=Customer(choice,row_of_values[1],row_of_values[2],row_of_values[3],row_of_values[4],row_of_values[5],row_of_values[6],row_of_values[7],row_of_values[8])
                 new_customer.add_client_to_csv()
             else:
                 print("we do not currently have an applicant with that id")
-
 
 
 
