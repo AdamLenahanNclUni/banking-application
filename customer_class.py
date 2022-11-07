@@ -27,7 +27,8 @@ class Customer:
 
     def withdrawal(self, amount):
         """lets the user withdraw an amount of money, catches any errors caused by going over overdraft limit"""
-        self.b = int(self.b)
+        self.b = float(self.b)
+        self.b = round(self.b,2)
         print("current amount in bank balance is ", self.b)
         if amount <= self.b:
             self.b -= amount
@@ -38,7 +39,7 @@ class Customer:
             # if the user withdraws more money than they have in their
             # account then a check is performed to make sure they
             # haven't gone over their overdraft limit
-            if self.b - amount > -int(self.ov):
+            if self.b - amount > -round(float(self.ov),2):
                 self.b -= amount
                 print("you've withdrawn money and gone into your overdraft, you are still within the limit though")
             else:
@@ -49,8 +50,9 @@ class Customer:
 
     def deposit(self, amount):
         """lets the user deposit an amount of money, adds it to their account"""
-        self.b=int(self.b)
-        amount= int(amount)
+        self.b=float(self.b)
+        self.b=round(self.b,2)
+        amount= float(amount)
         self.b += amount
         print("you have deposited £", amount, "new bank balance is £", self.b)
 

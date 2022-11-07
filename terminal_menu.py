@@ -51,13 +51,21 @@ def main_menu():
 def make_withdrawal():
     customer_id = select_customer_by_id()
     money_to_withdraw = input("how much money would you like to withdraw? ")
+    stop = False
+    while stop is False:
+        try:
+            money_to_withdraw = float(money_to_withdraw)
+            money_to_withdraw = round(money_to_withdraw,2)
+            stop = True
+        except:
+            money_to_withdraw = input("Invalid input, please try again ")
     with open('UserDetails.csv', 'r') as file:
         filecontent = csv.reader(file)
         for row in filecontent:
             if row[0] == customer_id:
                 row_of_values=row
     new_customer= Customer(row_of_values[0], row_of_values[1], row_of_values[2], row_of_values[3], row_of_values[4], row_of_values[5], row_of_values[6], row_of_values[7], row_of_values[8])
-    new_customer.withdrawal(int(money_to_withdraw))
+    new_customer.withdrawal(money_to_withdraw)
     remove_customer(customer_id)
     new_customer.add_client_to_csv()
 
@@ -65,13 +73,21 @@ def make_withdrawal():
 def make_deposit():
     customer_id = select_customer_by_id()
     money_to_deposit = input("how much money would you like to deposit? ")
+    stop = False
+    while stop is False:
+        try:
+            money_to_deposit = float(money_to_deposit)
+            money_to_deposit = round(money_to_deposit,2)
+            stop = True
+        except:
+            money_to_deposit = input("Invalid input, please try again ")
     with open('UserDetails.csv', 'r') as file:
         filecontent = csv.reader(file)
         for row in filecontent:
             if row[0] == customer_id:
                 row_of_values=row
     new_customer= Customer(row_of_values[0], row_of_values[1], row_of_values[2], row_of_values[3], row_of_values[4], row_of_values[5], row_of_values[6], row_of_values[7], row_of_values[8])
-    new_customer.deposit(int(money_to_deposit))
+    new_customer.deposit(money_to_deposit)
     remove_customer(customer_id)
     new_customer.add_client_to_csv()
 
