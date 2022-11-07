@@ -3,12 +3,30 @@ import datetime
 import csv
 
 
+def select_customer_by_id():
+    id_to_select = input("please enter the ID of the account you would like to manipulate.")
+
+    stop = False
+    while stop is False:
+        with open('UserDetails.csv', 'r') as file:
+            filecontent = csv.reader(file)
+            for row in filecontent:
+                if row[0] == id_to_select:
+                    row_of_values=row
+                    stop = True
+            if stop is False:
+                id_to_select = input("input invalid please try again")
+
+    return id_to_select
+
+
 def main_menu():
     """creates an infinite loop that presents the user with a list of options for interacting with an account?"""
     stop = False
     while stop is False:
         print("would you like to add a new customer (1), delete a customer (2), edit a customers details(3),"
-              " view a list of all customers(4) or search for a client(5), or logout (6)")
+              " view a list of all customers(4), search for a client(5), deposit some money for a customer(6),"
+              " withdraw some money for a customer(7) or logout (8)")
         choice = str(input())
         if choice == "1":
             create_new_account()
@@ -21,9 +39,41 @@ def main_menu():
         elif choice == "5":
             search_for_clients_main()
         elif choice == "6":
+            make_deposit()
+        elif choice=="7":
+            make_withdrawal()
+        elif choice == "8":
             stop = True
         else:
             print("unexpected input, please try again")
+
+
+def make_withdrawal():
+    customer_id = select_customer_by_id()
+    money_to_withdraw = input("how much money would you like to withdraw? ")
+    with open('UserDetails.csv', 'r') as file:
+        filecontent = csv.reader(file)
+        for row in filecontent:
+            if row[0] == customer_id:
+                row_of_values=row
+    new_customer= Customer(row_of_values[0], row_of_values[1], row_of_values[2], row_of_values[3], row_of_values[4], row_of_values[5], row_of_values[6], row_of_values[7], row_of_values[8])
+    new_customer.withdrawal(int(money_to_withdraw))
+    remove_customer(customer_id)
+    new_customer.add_client_to_csv()
+
+
+def make_deposit():
+    customer_id = select_customer_by_id()
+    money_to_deposit = input("how much money would you like to deposit? ")
+    with open('UserDetails.csv', 'r') as file:
+        filecontent = csv.reader(file)
+        for row in filecontent:
+            if row[0] == customer_id:
+                row_of_values=row
+    new_customer= Customer(row_of_values[0], row_of_values[1], row_of_values[2], row_of_values[3], row_of_values[4], row_of_values[5], row_of_values[6], row_of_values[7], row_of_values[8])
+    new_customer.deposit(int(money_to_deposit))
+    remove_customer(customer_id)
+    new_customer.add_client_to_csv()
 
 
 def get_date():
@@ -45,6 +95,7 @@ def get_date():
         except ValueError:
             print("Incorrect format, please try again")
     return date_of_birth
+
 
 def create_new_account():
     """gives the user a way to create a new line in the csv file which represents a user"""
@@ -107,10 +158,6 @@ def create_new_account():
     new_client = Customer(id, first_name, last_name, user_title, preferred_pronouns, date_of_birth, user_occupation, user_balance,
              draught_limit)
     new_client.add_client_to_csv()
-
-def select_customer_by_id():
-    id_to_select = input("please enter the ID of the account you would like to delete")
-    return id_to_select
 
 
 def remove_customer(id_to_delete):
@@ -185,7 +232,6 @@ def edit_customer():
                 new_customer.add_client_to_csv()
             else:
                 print("we do not currently have an applicant with that id")
-
 
 
 def search_for_clients_main():
