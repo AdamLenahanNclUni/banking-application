@@ -14,6 +14,7 @@ def select_customer_by_id():
                 if row[0] == id_to_select:
                     row_of_values=row
                     stop = True
+                    print(row)
             if stop is False:
                 id_to_select = input("input invalid please try again")
 
@@ -254,53 +255,96 @@ def search_for_clients_main():
     stop = False
     while stop is False:
         choice = input(
-            "would you like to search for a specific client (1) or search for any client that matches a set of "
-            "criteria (2)")
+            "would you like to search for a specific client by first name(1), "
+            "by last name(2) by birthday(3) or by negative balance criteria (4)")
         if choice == "1":
-            search_for_clients_specific()
+            search_for_clients_first_name()
             stop = True
         elif choice == "2":
-            search_for_clients_by_criteria()
+            search_for_clients_by_last_name()
+            stop = True
+        elif choice == "3":
+            search_for_clients_by_birthday()
+            stop = True
+        elif choice == "4":
+            search_for_clients_by_negative_balance()
             stop = True
         else:
             print("input unknown please try again")
             stop = False
 
 
-def search_for_clients_specific():
-    first_or_last_name = input("Please enter the first or last name of the client you would like to view")
+def search_for_clients_first_name():
+    first_name = input("Please enter the first name of the client you would like to view")
+    count = 0
     # code adapted from https://www.tutorialspoint.com/how-to-read-csv-file-in-python#:~:text=Explanation%20line%20by
     # %20line%201%20import%20csv%20%E2%88%92,filecontents%20to%20print%20the%20file%20content%20row%20wise.
     with open('UserDetails.csv', 'r') as file:
         filecontent = csv.reader(file)
         for row in filecontent:
-            if row[1] == first_or_last_name:
+            if row[1] == first_name:
                 print(row)
-            elif row[2] == first_or_last_name:
-                print(row)
-            else:
-                print("we do not currently have a client with that name")
-    user_entered_id = input("Please enter the ID of the client displayed on the terminal you would like to view")
+                count+=1
+        if count>0:
+            print("please enter the id of the client you would like to view from this list")
+            select_customer_by_id()
+        else:
+            print("no users found with the provided data")
+
+
+def search_for_clients_by_last_name():
+    count=0
+    last_name = input("Please enter the last name of the client you would like to view")
+    # code adapted from https://www.tutorialspoint.com/how-to-read-csv-file-in-python#:~:text=Explanation%20line%20by
+    # %20line%201%20import%20csv%20%E2%88%92,filecontents%20to%20print%20the%20file%20content%20row%20wise.
     with open('UserDetails.csv', 'r') as file:
         filecontent = csv.reader(file)
         for row in filecontent:
-            if row[0] == user_entered_id:
+            if row[2] == last_name:
                 print(row)
-            else:
-                print("we do not currently have an applicant with that id")
+                count += 1
+        if count > 0:
+            print("please enter the id of the client you would like to view from this list")
+            select_customer_by_id()
+        else:
+            print("no users found with the provided data")
 
 
-def search_for_clients_by_criteria():
-    choice=input("would you like to view clients by balance(1), occupation(2), title(3), or age(4)")
-    if choice=="1":
-        print("yo")
-    elif choice=="2":
-        print("yo")
-    elif choice=="3":
-        print("yo")
-    elif choice=="4":
-        print("yo")
+def search_for_clients_by_birthday():
+    count = 0
+    date_of_birth = get_date()
+    # code adapted from https://www.tutorialspoint.com/how-to-read-csv-file-in-python#:~:text=Explanation%20line%20by
+    # %20line%201%20import%20csv%20%E2%88%92,filecontents%20to%20print%20the%20file%20content%20row%20wise.
+    with open('UserDetails.csv', 'r') as file:
+        filecontent = csv.reader(file)
+        for row in filecontent:
+            if str(row[5]) == str(date_of_birth):
+                print(row)
+                count += 1
+        if count > 0:
+            print("please enter the id of the client you would like to view from this list")
+            select_customer_by_id()
+        else:
+            print("no users found with the provided data")
 
+
+def search_for_clients_by_negative_balance():
+    count = 0
+    with open('UserDetails.csv', 'r') as file:
+        filecontent = csv.reader(file)
+        for row in filecontent:
+            try:
+                compare = float(row[7])
+                if compare < 0:
+                    print(row)
+                    count += 1
+            except:
+                count+=0
+        if count > 0:
+            print("please enter the id of the client you would like to view from this list")
+            select_customer_by_id()
+        else:
+            print("no users found with the provided data")
 
 def view_all_customers():
     # code adapted from https://www.tutorialspoint.com/how-to-read-csv-file-in-python#:~:text=Explanation%20line%20by
