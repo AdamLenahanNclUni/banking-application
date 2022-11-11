@@ -209,16 +209,17 @@ def delete_customer():
     id_to_delete = select_customer_by_id()
     remove_customer(id_to_delete)
 
-
+#SPEAK TO DEMONSTRATOR, WHEN ONLY ONE CUSTOMER IN USERDETAILS.CSV FOR LOOP BREAKS, DON'T KNOW WHY
 def edit_customer():
+    found_specified_user = False
     choice =  select_customer_by_id()
     with open('UserDetails.csv', 'r') as file:
         filecontent = csv.reader(file)
         for row in filecontent:
             if row[0] == choice:
                 row_of_values=row
-                print(row)
                 stop = False
+                found_specified_user = True
                 while stop is False:
                     try:
                         column_to_change = input(
@@ -233,22 +234,28 @@ def edit_customer():
                          print("please enter an integer value")
                 remove_customer(choice)
 
-                print("what is the new value you would like to change this column to? ")
-                print(row_of_values)
-                if column_to_change == "7":
+                #print("what is the new value you would like to change this column to? ")
+                #print(row_of_values)
+                if column_to_change == 7:
                     column_to_change+=1
-                    print("please enter the new balance for the user")
-                    new_value = input()
-                elif column_to_change== "5":
-                    new_value = get_date
+                    stop = False
+                    while stop == False:
+                        try:
+                            new_value = input("please enter the new balance for the user")
+                            new_value = float(new_value)
+                            stop = True
+                        except:
+                            print("input formatted incorrectly, please try again")
+                elif column_to_change== 5:
+                    new_value = get_date()
                 else:
                     new_value = input("please enter the new value for this user")
                 row_of_values[column_to_change]= new_value
                 print(row_of_values)
                 new_customer=Customer(choice,row_of_values[1],row_of_values[2],row_of_values[3],row_of_values[4],row_of_values[5],row_of_values[6],row_of_values[7],row_of_values[8])
                 new_customer.add_client_to_csv()
-            else:
-                print("we do not currently have an applicant with that id")
+        if not found_specified_user:
+            print("we do not currently have an applicant with that id")
 
 
 def search_for_clients_main():
@@ -286,7 +293,6 @@ def search_for_clients_first_name():
                 print(row)
                 count+=1
         if count>0:
-            print("please enter the id of the client you would like to view from this list")
             select_customer_by_id()
         else:
             print("no users found with the provided data")
@@ -326,6 +332,7 @@ def search_for_clients_by_birthday():
             select_customer_by_id()
         else:
             print("no users found with the provided data")
+
 
 
 def search_for_clients_by_negative_balance():

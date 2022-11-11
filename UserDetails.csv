@@ -1,4 +1,3 @@
 id,firstName,lastName,title,preferredPronouns,dateBorn,occupation,balance,overdraftLimit
-b1,adam,lenahan,title,preferredPronouns,2000-10-08,occupation,0,overdraftLimit
-b3,adam,lastName,title,preferredPronouns,2000-10-01,occupation,980.0,1000
-b2,adam,lenahan,title,preferredPronouns,1990-10-01,occupation,-100,overdraftLimit
+b2,adam,lastName,title,preferredPronouns,1990-11-11,occupation,980.0,1.0
+b3,hi,lastName,title,preferredPronouns,1990-11-11,occupation,980.0,1.0
