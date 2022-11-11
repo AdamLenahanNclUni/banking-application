@@ -4,6 +4,7 @@ import csv
 
 
 def select_customer_by_id():
+    view_customer_id_and_name()
     id_to_select = input("please enter the ID of the account you would like to manipulate.")
 
     stop = False
@@ -334,7 +335,6 @@ def search_for_clients_by_birthday():
             print("no users found with the provided data")
 
 
-
 def search_for_clients_by_negative_balance():
     count = 0
     with open('UserDetails.csv', 'r') as file:
@@ -353,6 +353,7 @@ def search_for_clients_by_negative_balance():
         else:
             print("no users found with the provided data")
 
+
 def view_all_customers():
     # code adapted from https://www.tutorialspoint.com/how-to-read-csv-file-in-python#:~:text=Explanation%20line%20by
     # %20line%201%20import%20csv%20%E2%88%92,filecontents%20to%20print%20the%20file%20content%20row%20wise.
@@ -360,6 +361,13 @@ def view_all_customers():
         filecontent = csv.reader(file)
         for row in filecontent:
             print(row)
+
+
+def view_customer_id_and_name():
+    with open('UserDetails.csv', 'r') as file:
+        filecontent = csv.reader(file)
+        for row in filecontent:
+            print(row[0], row[1], row[2])
 
 
 main_menu()
