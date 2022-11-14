@@ -9,25 +9,60 @@ def sort_by_id():
         next(file)
         for row in filecontent:
             try:
-                list_of_ids.append(row[0].deleteCharAt(0))
+                list_of_ids.append(row[0])
             except:
                 break
-    bubbleSort(list_of_ids)
-    with open('UserDetails.csv', 'r')as file:
-        filecontent = csv.reader(file)
-        next(file)
+    print(list_of_ids)
+    list_of_ids = bubble_sort(list_of_ids)
+    print(list_of_ids)
+
+    with open('UserDetails.csv', 'r') as file4:
+        filecontent4 = csv.reader(file4)
+        for row4 in filecontent4:
+            if row4[0] == "id":
+                output_file = open('UserDetailsDelete.csv', 'a', newline='')
+                writer = csv.writer(output_file)
+                writer.writerow(row4)
+                output_file.close
+
+    for x in list_of_ids:
+        print("x=",x)
+        with open('UserDetails.csv', 'r') as file2:
+            filecontent2 = csv.reader(file2)
+            for row2 in filecontent2:
+                print("row2 = ", row2)
+                if row2[0] == x:
+                    output_file = open('UserDetailsDelete.csv', 'a', newline='')
+                    writer = csv.writer(output_file)
+                    writer.writerow(row2)
+                    output_file.close
 
 
 
+    f = open("UserDetails.csv", "w+")
+    f.close()
 
 
-def bubbleSort(list_of_ids):
+
+    with open('UserDetailsDelete.csv', 'r') as file3:
+        filecontent3 = csv.reader(file3)
+        for row3 in filecontent3:
+            output_file = open('UserDetails.csv', 'a', newline='')
+            writer = csv.writer(output_file)
+            writer.writerow(row3)
+            output_file.close
+    f = open("UserDetailsDelete.csv", "w+")
+    f.close()
+
+
+
+def bubble_sort(list_of_ids):
     n = len(list_of_ids)
     for i in range(n):
         for j in range(0, n-i-1):
           if list_of_ids[j] > list_of_ids[j+1] :
              list_of_ids[j], list_of_ids[j+1] = list_of_ids[j+1], list_of_ids[j]
-
+    return list_of_ids
 
 def select_customer_by_id():
     view_customer_id_and_name()
@@ -401,4 +436,4 @@ def view_customer_id_and_name():
             print(row[0], row[1], row[2])
 
 
-main_menu()
+sort_by_id()

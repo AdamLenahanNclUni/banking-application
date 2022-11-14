@@ -1,3 +1,6 @@
-id,firstName,lastName,title,preferredPronouns,dateBorn,occupation,balance,overdraftLimit
+id,name
+b1,hello,lastName,title,preferredPronouns,1990-11-11,occupation,980.0,1.0
 b2,robertrobert,lastName,title,preferredPronouns,1990-11-11,occupation,980.0,1.0
 b3,robert,lastName,title,preferredPronouns,1990-11-11,occupation,980.0,1.0
+b4,hi
+b5,hey
