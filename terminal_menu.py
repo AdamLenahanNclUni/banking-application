@@ -2,6 +2,32 @@ from customer_class import Customer
 import datetime
 import csv
 
+def sort_by_id():
+    list_of_ids = []
+    with open('UserDetails.csv', 'r') as file:
+        filecontent = csv.reader(file)
+        next(file)
+        for row in filecontent:
+            try:
+                list_of_ids.append(row[0].deleteCharAt(0))
+            except:
+                break
+    bubbleSort(list_of_ids)
+    with open('UserDetails.csv', 'r')as file:
+        filecontent = csv.reader(file)
+        next(file)
+
+
+
+
+
+def bubbleSort(list_of_ids):
+    n = len(list_of_ids)
+    for i in range(n):
+        for j in range(0, n-i-1):
+          if list_of_ids[j] > list_of_ids[j+1] :
+             list_of_ids[j], list_of_ids[j+1] = list_of_ids[j+1], list_of_ids[j]
+
 
 def select_customer_by_id():
     view_customer_id_and_name()
@@ -213,10 +239,13 @@ def delete_customer():
 #SPEAK TO DEMONSTRATOR, WHEN ONLY ONE CUSTOMER IN USERDETAILS.CSV FOR LOOP BREAKS, DON'T KNOW WHY
 def edit_customer():
     found_specified_user = False
-    choice =  select_customer_by_id()
+    choice = select_customer_by_id()
     with open('UserDetails.csv', 'r') as file:
         filecontent = csv.reader(file)
+        next(file)
+        # print(list(filecontent))
         for row in filecontent:
+            row=list(row)
             if row[0] == choice:
                 row_of_values=row
                 stop = False
@@ -255,8 +284,10 @@ def edit_customer():
                 print(row_of_values)
                 new_customer=Customer(choice,row_of_values[1],row_of_values[2],row_of_values[3],row_of_values[4],row_of_values[5],row_of_values[6],row_of_values[7],row_of_values[8])
                 new_customer.add_client_to_csv()
+                break
         if not found_specified_user:
             print("we do not currently have an applicant with that id")
+
 
 
 def search_for_clients_main():
