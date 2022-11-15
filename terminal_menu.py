@@ -364,7 +364,7 @@ def edit_customer():
     with open('UserDetails.csv', 'r') as file:
         filecontent = csv.reader(file)
         next(file)
-        # print(list(filecontent))
+
         for row in filecontent:
             row = list(row)
             if row[0] == choice:
@@ -412,6 +412,8 @@ def edit_customer():
 
 
 def search_for_clients_main():
+    """this subroutine gets the user to decide whether they want to search for clients using a first name, last name,
+    date of birth or negative balance. """
     stop = False
     while stop is False:
         choice = input(
@@ -432,9 +434,14 @@ def search_for_clients_main():
         else:
             print("input unknown please try again")
             stop = False
+        # this while loop ends once the user enters a valid choice (ie 1,2,3 or 4) otherwise it keeps asking the user
+        # which criteria they want to search the csv file with. it uses an if statment to check the users input and
+        # subroutine calls to fetch the functionality the user wants to interact with.
 
 
 def search_for_clients_first_name():
+    """this subroutine gets the user to enter a last name and then prints out a list of all clients with that last
+        name """
     first_name = input("Please enter the first name of the client you would like to view")
     count = 0
     # we get the user to enter a first name and initialise the variable count to be equal to 0
@@ -458,6 +465,8 @@ def search_for_clients_first_name():
 
 
 def search_for_clients_by_last_name():
+    """this subroutine gets the user to enter a first name and then prints out a list of all clients with that first
+    name """
     count = 0
     last_name = input("Please enter the last name of the client you would like to view")
     # we get the user to enter a last name and initialise the variable count to be equal to 0
