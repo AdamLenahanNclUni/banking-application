@@ -69,9 +69,8 @@ def sort_by_id():
 
     f = open("UserDetailsDelete.csv", "w+")
     f.close()
+    # this code copies all entries in the secod file back into the first and then deletes all entries in the second file.
 
-
-# this code copies all entries in the secod file back into the first and then deletes all entries in the second file.
 
 def bubble_sort(list_of_ids):
     """sorts a list of ids using bubble sort"""
@@ -81,6 +80,7 @@ def bubble_sort(list_of_ids):
             if list_of_ids[j] > list_of_ids[j + 1]:
                 list_of_ids[j], list_of_ids[j + 1] = list_of_ids[j + 1], list_of_ids[j]
     return list_of_ids
+    #the above code is a basic bubble sort algorithm
 
 
 def select_customer_by_id():
@@ -361,13 +361,16 @@ def edit_customer():
     """this subroutine allows the user to edit part of a row in the csv file"""
     found_specified_user = False
     choice = select_customer_by_id()
+    # get the id of a user which we will be editing.
     with open('UserDetails.csv', 'r') as file:
         filecontent = csv.reader(file)
         next(file)
-
+        # open a file reader and skip the first row. This is to avoid the title row which is always the first row.
         for row in filecontent:
             row = list(row)
+            # looping through each row.
             if row[0] == choice:
+                #checking to see if the current row is the user we are looking for
                 row_of_values = row
                 stop = False
                 found_specified_user = True
@@ -376,39 +379,52 @@ def edit_customer():
                         column_to_change = input(
                             "would you like to change this user's first name(1), last name(2), title(3), preferred pronouns(4), date of birth(5), occupation(6) or overdraught limit(7)")
                         column_to_change = int(column_to_change)
+                        # take the users input and ask which column they would like to change.
                         if column_to_change > 0 and column_to_change < 8:
                             stop = True
+                            # if the user enters a valid column let them exit the while loop
                         else:
                             print("please enter a number between 1 and 7")
                             stop = False
+                            # if the user doesn't enter a valid don't let them leave and ask
+                            # them what they would like to select again
                     except:
                         print("please enter an integer value")
                 remove_customer(choice)
+                # remove the old values of the user from the csv file
 
-                # print("what is the new value you would like to change this column to? ")
-                # print(row_of_values)
                 if column_to_change == 7:
                     column_to_change += 1
+                    # if the user wants to change the overdraught limit then increment column to change by 1 as the
+                    # index calue of overdraught limit is 8 and is referenced by column to change later on.
                     stop = False
                     while stop == False:
                         try:
-                            new_value = input("please enter the new balance for the user")
+                            new_value = input("please enter the new overdraught limit for the user")
                             new_value = float(new_value)
                             stop = True
+                            # the user is asked to enter the new overdraught limit. If they enter a valid float value they
+                            # are allowed to exit the while loop
                         except:
                             print("input formatted incorrectly, please try again")
                 elif column_to_change == 5:
                     new_value = get_date()
+                    # because date is in datetime format we call getdate() to ensure the date
+                    # the user enters is valid and error free
                 else:
                     new_value = input("please enter the new value for this user")
                 row_of_values[column_to_change] = new_value
+                # if the user enters a valid column which accepts a string value then we
+                # simply update the users value with an equals statement
                 print(row_of_values)
                 new_customer = Customer(choice, row_of_values[1], row_of_values[2], row_of_values[3], row_of_values[4],
                                         row_of_values[5], row_of_values[6], row_of_values[7], row_of_values[8])
                 new_customer.add_client_to_csv()
+                # the new values for user are instantiated into an object and added to the csv file
                 break
         if not found_specified_user:
             print("we do not currently have an applicant with that id")
+            #if we can't find the user the id entered corresponds to  we print this statement
 
 
 def search_for_clients_main():

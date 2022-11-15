@@ -1,4 +1,4 @@
-id,name,lastName,title,preferredPronouns,1990-11-11,occupation,980.0,1.0
+id,name,lastName,title,preferredPronouns,date-of-birth,occupation,balance,overdraught-limit
 b2,robertrobert,lastName,title,preferredPronouns,1990-11-11,occupation,980.0,1.0
 b3,robert,lastName,title,preferredPronouns,1990-11-11,occupation,980.0,1.0
 b1,robert,lastName,title,preferredPronouns,1990-11-11,occupation,980.0,1.0
