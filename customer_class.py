@@ -16,7 +16,7 @@ class Customer:
         self.ov = overdraft_limit
 
     def add_client_to_csv(self):
-
+        """Takes a user object and adds their attributes to the cvs file for storage"""
 
         row_of_items = [self.i, self.f, self.l, self.t, self.p, self.d, self.o, self.b, self.ov]
 
@@ -57,5 +57,6 @@ class Customer:
         print("you have deposited £", amount, "new bank balance is £", self.b)
 
     def __str__(self):
+        """prints a string representation if the user"""
         return f'Customer {self.f} {self.l} has a balance of {self.b}'
 
