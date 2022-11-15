@@ -437,6 +437,7 @@ def search_for_clients_main():
 def search_for_clients_first_name():
     first_name = input("Please enter the first name of the client you would like to view")
     count = 0
+    # we get the user to enter a first name and initialise the variable count to be equal to 0
     # code adapted from https://www.tutorialspoint.com/how-to-read-csv-file-in-python#:~:text=Explanation%20line%20by
     # %20line%201%20import%20csv%20%E2%88%92,filecontents%20to%20print%20the%20file%20content%20row%20wise.
     with open('UserDetails.csv', 'r') as file:
@@ -445,15 +446,21 @@ def search_for_clients_first_name():
             if row[1] == first_name:
                 print(row)
                 count += 1
+                # we read through every entry in the file and if the first name column matches the value entered
+                # by the user we print that row and increment count by one.
         if count > 0:
             select_customer_by_id()
+            # if count>0 (ie if we have found one or more users with the first name entered) then we get the user
+            # to select a specific client
         else:
             print("no users found with the provided data")
+            # if there are no users with the first name entered then we tell the user this by using a print statement.
 
 
 def search_for_clients_by_last_name():
     count = 0
     last_name = input("Please enter the last name of the client you would like to view")
+    # we get the user to enter a last name and initialise the variable count to be equal to 0
     # code adapted from https://www.tutorialspoint.com/how-to-read-csv-file-in-python#:~:text=Explanation%20line%20by
     # %20line%201%20import%20csv%20%E2%88%92,filecontents%20to%20print%20the%20file%20content%20row%20wise.
     with open('UserDetails.csv', 'r') as file:
@@ -462,11 +469,16 @@ def search_for_clients_by_last_name():
             if row[2] == last_name:
                 print(row)
                 count += 1
+                # we read through every entry in the file and if the last name column matches the value entered
+                # by the user we print that row and increment count by one.
         if count > 0:
             print("please enter the id of the client you would like to view from this list")
             select_customer_by_id()
+            # if count>0 (ie if we have found one or more users with the last name entered) then we get the user
+            # to select a specific client
         else:
             print("no users found with the provided data")
+            # if there are no users with the last name entered then we tell the user this by using a print statement.
 
 
 def search_for_clients_by_birthday():
@@ -474,7 +486,7 @@ def search_for_clients_by_birthday():
     the csv file to find all the users with a atching date of birth"""
     count = 0
     date_of_birth = get_date()
-    #we get the user to enter a date and initialise the variable count to be equal to 0
+    # we get the user to enter a date and initialise the variable count to be equal to 0
     # code adapted from https://www.tutorialspoint.com/how-to-read-csv-file-in-python#:~:text=Explanation%20line%20by
     # %20line%201%20import%20csv%20%E2%88%92,filecontents%20to%20print%20the%20file%20content%20row%20wise.
     with open('UserDetails.csv', 'r') as file:
@@ -483,13 +495,16 @@ def search_for_clients_by_birthday():
             if str(row[5]) == str(date_of_birth):
                 print(row)
                 count += 1
-                #we read through evbery entry in the file and if the date of birth column matches the value entered by the user we print that row and increment count by one.
+                # we read through every entry in the file and if the date of birth column matches the value entered
+                # by the user we print that row and increment count by one.
         if count > 0:
             print("please enter the id of the client you would like to view from this list")
             select_customer_by_id()
-            # if count>0 ie if we have found one or more users with the date of birth entered then we prin out all of
+            # if count>0 (ie if we have found one or more users with the date of birth entered) then we get the user
+            # to select a specific client
         else:
             print("no users found with the provided data")
+            # if there are no users with the date of birth enered then we tell the user this by using a print statement.
 
 
 def search_for_clients_by_negative_balance():
