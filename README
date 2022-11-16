@@ -16,6 +16,8 @@ Assumptions
 It is assumed that no two people will share an id.
 It is assumed that the user will not deliberately try and break the program by entering "id" when making changes to users
 It is assumed that a user can be created with a negative amount of money in their bank account.
+It is assumed that when searching for a user capitilisation matters ie if "adam" is entered "Adam" will not be equal to it.
+(ie the program is case sensitive when searching)
 
 How to run
 ----------
@@ -39,6 +41,28 @@ If you enter an invalid id then the program will print that the id is invalid an
 you enter a valid id.
 
 If you enter 3 in the main menu then you will be presented with a list of all the ids firsst names and last names of the
-users in
+users in the csv file. You will then be asked to select one (if the selection is valid you will move past this stage, if
+not then you will be asked to enter your selection again until it isn't invalid). Once you have selected a user you will
+be shown a list of all their details and asked whether you would like to change their first name, last name, title, prefered,
+pronouns, date of birth, ocupation or overdraught limit. overdraught limit only accepts float values and date of birth
+requires a valid date to be entered. Everything else accepts any string of any length.
+
+If you enter 4 then you will be presented with a list of all the customers in the csv file and returned to the main menu.
+
+If you enter 5 you will be asked whether you want to search for clients by first name, last name, birthday or negative balance.
+if you choose negative balance then a list of all users is displayed with a balance of less than 0. If you choose anything
+else you will be asked to enter the value you would like to search the csv file for. Once entered the program searches
+the csv file for the value. If it finds it it prints out all the rows that contain it. If it doesn't it prints out an
+error message letting the user know there are no rows with that value in the csv file.
+
+If you enter 6 you will be presented with a list of the id, the first name, and the last name of everyone in the csv file.
+You will then be asked to select someone to add money to. Once you have selected someone you will be presented with a list
+of all their details. You will then be asked how much money you would like to deposit. after entering a valid amount that
+money will be added to the user's balance
+
+If you enter 7 you will be presented with a list of the id, the first name, and the last name of everyone in the csv file.
+You will then be asked to select someone to withdraw money from to. Once you have selected someone you will be presented
+with a listof all their details. You will then be asked how much money you would like to withdraw. after entering a valid
+amount that money will be removed to the user's balance
 
 Pressing 8 will end the program.
