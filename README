@@ -17,6 +17,7 @@ It is assumed that no two people will share an id.
 It is assumed that the user will not deliberately try and break the program by entering "id" when making changes to users
 It is assumed that a user can be created with a negative amount of money in their bank account.
 It is assumed that when searching for a user capitilisation matters ie if "adam" is entered "Adam" will not be equal to it.
+It is assumed that the user will not enter a negative number for the withdraw or deposit options for the program.
 (ie the program is case sensitive when searching)
 
 How to run
