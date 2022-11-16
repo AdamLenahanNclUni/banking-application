@@ -314,6 +314,9 @@ def create_new_account():
                           user_balance,
                           draught_limit)
     new_client.add_client_to_csv()
+    # the above two lines of code create a new object which is then added to the csv file.
+    sort_by_id()
+    # the csv file is sorted.
 
 
 def remove_customer(id_to_delete):
@@ -348,6 +351,8 @@ def remove_customer(id_to_delete):
     f.truncate()
     f.close()
     # deleting all the values in the file we copied our original file to.
+    sort_by_id()
+    # the csv file is sorted
 
 
 def delete_customer():
@@ -425,6 +430,8 @@ def edit_customer():
         if not found_specified_user:
             print("we do not currently have an applicant with that id")
             #if we can't find the user the id entered corresponds to  we print this statement
+    sort_by_id()
+    #the csv file is sorted.
 
 
 def search_for_clients_main():
@@ -576,5 +583,5 @@ def view_customer_id_and_name():
             print(row[0], row[1], row[2])
             # opens a file reader and prints a list of the first names, last names and ids of everone in the csv file
 
-
+sort_by_id()
 main_menu()
