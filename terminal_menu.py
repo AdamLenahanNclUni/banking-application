@@ -17,7 +17,8 @@ def sort_by_id():
         # does not need to be sorted
         for row in filecontent:
             try:
-                list_of_ids.append(row[0])
+                list_of_ids.append(int(row[0]))
+
             except:
                 break
                 # this try except statement tries to add the id on the row to the list, if there is an empty row(which
@@ -30,6 +31,7 @@ def sort_by_id():
     # later.
     with open('UserDetails.csv', 'r') as file4:
         filecontent4 = csv.reader(file4)
+
         for row4 in filecontent4:
             if row4[0] == "id":
                 output_file = open('UserDetailsDelete.csv', 'a', newline='')
@@ -42,9 +44,10 @@ def sort_by_id():
         print("x=", x)
         with open('UserDetails.csv', 'r') as file2:
             filecontent2 = csv.reader(file2)
+            next(file2)
             for row2 in filecontent2:
                 print("row2 = ", row2)
-                if row2[0] == x:
+                if int(row2[0]) == x:
                     output_file = open('UserDetailsDelete.csv', 'a', newline='')
                     writer = csv.writer(output_file)
                     writer.writerow(row2)
@@ -305,10 +308,9 @@ def create_new_account():
         file_content = csv.reader(file)
         for row in file_content:
             i = row[0]
-    i = i[1:]
     i = int(i)
     i += 1
-    id = "b" + str(i)
+    id = str(i)
     # this line generates the id for the users csv file by selecting the id of the last entry and creating an id that is greater than it by one
     new_client = Customer(id, first_name, last_name, user_title, preferred_pronouns, date_of_birth, user_occupation,
                           user_balance,
