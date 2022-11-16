@@ -22,6 +22,7 @@ It is assumed that the user will not enter a negative number for the withdraw or
 
 How to run
 ----------
+type "pip install -r requirements.txt" into the terminal
 type "python terminal_menu.py" in the terminal. Follow the instructions as they come up to complete the tasks you want
 to complete.
 
