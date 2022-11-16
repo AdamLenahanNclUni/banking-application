@@ -481,9 +481,9 @@ def search_for_clients_first_name():
                 # we read through every entry in the file and if the first name column matches the value entered
                 # by the user we print that row and increment count by one.
         if count > 0:
-            select_customer_by_id()
-            # if count>0 (ie if we have found one or more users with the first name entered) then we get the user
-            # to select a specific client
+            print("we have at least one client with that name")
+            # if count>0 (ie if we have found one or more users with the first name entered) then we notify the user
+            # that there is a cient by that criteria
         else:
             print("no users found with the provided data")
             # if there are no users with the first name entered then we tell the user this by using a print statement.
@@ -506,10 +506,9 @@ def search_for_clients_by_last_name():
                 # we read through every entry in the file and if the last name column matches the value entered
                 # by the user we print that row and increment count by one.
         if count > 0:
-            print("please enter the id of the client you would like to view from this list")
-            select_customer_by_id()
-            # if count>0 (ie if we have found one or more users with the last name entered) then we get the user
-            # to select a specific client
+            print("we have at least one client with that name")
+            # if count>0 (ie if we have found one or more users with the last name entered) then we notify the user
+            # that there is a cient by that criteria
         else:
             print("no users found with the provided data")
             # if there are no users with the last name entered then we tell the user this by using a print statement.
@@ -532,10 +531,9 @@ def search_for_clients_by_birthday():
                 # we read through every entry in the file and if the date of birth column matches the value entered
                 # by the user we print that row and increment count by one.
         if count > 0:
-            print("please enter the id of the client you would like to view from this list")
-            select_customer_by_id()
-            # if count>0 (ie if we have found one or more users with the date of birth entered) then we get the user
-            # to select a specific client
+            print("we have at least one client with that date of birth")
+            # if count>0 (ie if we have found one or more users with the date of birth entered) then we notify the user
+            # that there is a cient by that criteria
         else:
             print("no users found with the provided data")
             # if there are no users with the date of birth enered then we tell the user this by using a print statement.
@@ -557,10 +555,9 @@ def search_for_clients_by_negative_balance():
                 # reads every 8th column in all the rows in the table. If there are any with a value less than 0 they
                 # are printed to the screen and the count is incremented by one.
         if count > 0:
-            print("please enter the id of the client you would like to view from this list")
-            select_customer_by_id()
-            # if there are users with a balance less than 0 the user is presented with a list of them and asked to
-            # select one.
+            print("we have at least one client with a negative balance")
+            # if count>0 (ie if we have found one or more users with a negative balance) then we notify the user
+            # that there is a cient by that criteria
         else:
             print("no users found with the provided data")
             # if there are no users with a balance of less than 0 then the user is told this with a print statement

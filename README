@@ -1,0 +1,44 @@
+Banking application for assessment 2
+===================================
+Overview of the program
+-----------------------
+This application uses object oriented programming along with a procedural terminal interface allow the user to act
+as an administrator for a bank. This means that the user is allowed access to all accounts to edit, make deposits
+and make withdrawals as they see fit alongside creating and deleteing new accounts. Account details are stored in a
+csv file for later use.
+
+Users are allowed to query the csv file to search for specific users. When editing user's details (eg making a deposit
+to change their balance) the row representing the user is saved to an object and changes are made in an object oriented
+manner.
+
+Assumptions
+-----------
+It is assumed that no two people will share an id.
+It is assumed that the user will not deliberately try and break the program by entering "id" when making changes to users
+It is assumed that a user can be created with a negative amount of money in their bank account.
+
+How to run
+----------
+type "python terminal_menu.py" in the terminal. Follow the instructions as they come up to complete the tasks you want
+to complete.
+
+Specific Use Case
+----------------
+open the terminal menu as discussed in the "how to run" section of this file. Wait for the program to load. Select an
+option from the main menu.
+
+If you enter 1 you will be required to enter the user's first name, last name, title, prefered
+pronouns, date of birth, occupation, current balance and overdraught limit. Once this is done (provided all data is entered
+correctly) an id will be generated for the user and the user will be added to the csv file. If at any point you enter
+invalid data eg ("aaa" for date of birth) you will be asked to try again until you enter valid data.
+
+If you enter 2 you will be presented with a list of all the first names, last names and Ids of the users in the csv file.
+You will then be asked to enter the id that corresponds to the user you want to delete. If you enter a valid id then you
+will be presented with a list of all the users still in the csv file and the user with the id you entered will be deleted.
+If you enter an invalid id then the program will print that the id is invalid and will ask you to try again until
+you enter a valid id.
+
+If you enter 3 in the main menu then you will be presented with a list of all the ids firsst names and last names of the
+users in
+
+Pressing 8 will end the program.
