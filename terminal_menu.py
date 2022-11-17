@@ -377,14 +377,15 @@ def edit_customer():
             row = list(row)
             # looping through each row.
             if row[0] == choice:
-                #checking to see if the current row is the user we are looking for
+                # checking to see if the current row is the user we are looking for
                 row_of_values = row
                 stop = False
                 found_specified_user = True
                 while stop is False:
                     try:
                         column_to_change = input(
-                            "would you like to change this user's first name(1), last name(2), title(3), preferred pronouns(4), date of birth(5), occupation(6) or overdraught limit(7)")
+                            "would you like to change this user's first name(1), last name(2), "
+                            "title(3), preferred pronouns(4), date of birth(5), occupation(6) or overdraught limit(7)")
                         column_to_change = int(column_to_change)
                         # take the users input and ask which column they would like to change.
                         if column_to_change > 0 and column_to_change < 8:
@@ -410,7 +411,8 @@ def edit_customer():
                             new_value = input("please enter the new overdraught limit for the user")
                             new_value = float(new_value)
                             stop = True
-                            # the user is asked to enter the new overdraught limit. If they enter a valid float value they
+                            # the user is asked to enter the new overdraught limit.
+                            # If they enter a valid float value they
                             # are allowed to exit the while loop
                         except:
                             print("input formatted incorrectly, please try again")
@@ -431,9 +433,9 @@ def edit_customer():
                 break
         if not found_specified_user:
             print("we do not currently have an applicant with that id")
-            #if we can't find the user the id entered corresponds to  we print this statement
+            # if we can't find the user the id entered corresponds to  we print this statement
     sort_by_id()
-    #the csv file is sorted.
+    # the csv file is sorted.
 
 
 def search_for_clients_main():
@@ -582,5 +584,8 @@ def view_customer_id_and_name():
             print(row[0], row[1], row[2])
             # opens a file reader and prints a list of the first names, last names and ids of everone in the csv file
 
+
 sort_by_id()
+
+
 main_menu()
