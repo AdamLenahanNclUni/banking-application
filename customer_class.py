@@ -60,3 +60,6 @@ class Customer:
         """prints a string representation if the user"""
         return f'Customer {self.f} {self.l} has a balance of {self.b}'
 
+    def __repr__(self):
+        return f'Customer {self.t} {self.f} {self.l} has a balance of {self.b} their overdraught limit is {self.ov}.' \
+               f' They were born on {self.b}. Their pronouns are {self.p} and they are a {self.o}'
