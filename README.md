@@ -14,20 +14,30 @@ manner.
 Assumptions
 -----------
 It is assumed that no two people will share an id.
+
 It is assumed that the user will not deliberately try and break the program by entering "id" when making changes to users
+
 It is assumed that a user can be created with a negative amount of money in their bank account.
+
 It is assumed that when searching for a user capitilisation matters ie if "adam" is entered "Adam" will not be equal to it.
 (ie the program is case sensitive when searching)
+
 It is assumed that the user will not enter a negative number for the withdraw or deposit options for the program.
+
 Due to the way accounts were generated only 2 users have a negative balance. The unusually low number of clients in
 their overdraught is not a bug it is just due to the way the data was generated on mockaroo.
 
 How to run
 ----------
 type "pip install -r requirements.txt" into the terminal
+
 type "python tests.py" to run the tests
+
 type "python terminal_menu.py" in the terminal. Follow the instructions as they come up to complete the tasks you want
 to complete.
+
+PLEASE RUN TESTS BEFORE ADDING USERS. THE ID VALUE FOR THE TEST USER IS HARD CODED AS 101. ADDING A NEW USER BEFORE 
+RUNNING TESTS WILL CAUSE TESTS TO FAIL DUE TO CLASHING ID'S
 
 Specific Use Case
 ----------------
